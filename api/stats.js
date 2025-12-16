@@ -1,16 +1,40 @@
-import { kv } from "@vercel/kv";
-
 export default async function handler(req, res) {
-  const views = (await kv.get("page_views")) || 0;
-  const totalTime = (await kv.get("total_session_time")) || 0;
-  const sessions = (await kv.get("session_count")) || 0;
+  try {
+    let kv;
+    try {
+      ({ kv } = await import("@vercel/kv"));
+    } catch (e) {
+      return res.status(200).json({
+        views: 0,
+        sessions: 0,
+        avgSession: 0
+      });
+    }
 
-  const avgSession =
-    sessions > 0 ? Math.round(totalTime / sessions) : 0;
+    const [views, sessions, totalSessionTime] = await Promise.all([
+      kv.get("views"),
+      kv.get("sessions"),
+      kv.get("totalSessionTime")
+    ]);
 
-  res.status(200).json({
-    views,
-    sessions,
-    avgSession
-  });
+    const safeViews = views ?? 0;
+    const safeSessions = sessions ?? 0;
+    const safeTotalTime = totalSessionTime ?? 0;
+
+    const avgSession =
+      safeSessions > 0 ? Math.round(safeTotalTime / safeSessions) : 0;
+
+    return res.status(200).json({
+      views: safeViews,
+      sessions: safeSessions,
+      avgSession
+    });
+  } catch (err) {
+    console.error("Stats API error:", err);
+    return res.status(500).json({
+      views: 0,
+      sessions: 0,
+      avgSession: 0
+    });
+  }
 }
