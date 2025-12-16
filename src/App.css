@@ -69,3 +69,15 @@ html, body {
   border: none;
   background: white;
 }
+
+.view-counter {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 6px 10px;
+  border-radius: 6px;
+}
