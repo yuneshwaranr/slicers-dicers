@@ -1,16 +1,28 @@
-import { kv } from "@vercel/kv";
-
 export default async function handler(req, res) {
-  if (req.method === "POST") {
-    const { duration } = req.body || {};
-
-    if (duration) {
-      await kv.incrby("total_session_time", duration);
-      await kv.incr("session_count");
+  try {
+    if (req.method !== "POST") {
+      return res.status(405).end();
     }
 
-    return res.status(200).json({ ok: true });
-  }
+    let kv;
+    try {
+      ({ kv } = await import("@vercel/kv"));
+    } catch {
+      return res.status(200).end();
+    }
 
-  res.status(405).end();
+    const { duration } = JSON.parse(req.body || "{}");
+
+    if (typeof duration === "number" && duration > 0) {
+      await Promise.all([
+        kv.incr("sessions"),
+        kv.incrby("totalSessionTime", duration)
+      ]);
+    }
+
+    return res.status(200).end();
+  } catch (err) {
+    console.error("Session API error:", err);
+    return res.status(200).end();
+  }
 }

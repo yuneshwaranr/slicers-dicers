@@ -56,28 +56,26 @@ function App() {
   const slides = activeReport.images;
 
   /* -------- PAGE VIEWS -------- */
-  useEffect(() => {
-    fetch("/api/analytics", { method: "POST" })
-      .then(res => res.json())
-      .then(data => setViews(data.views))
-      .catch(() => {});
-  }, []);
+useEffect(() => {
+  fetch("/api/view", { method: "POST" }).catch(() => {});
+}, []);
 
-  /* -------- SESSION DURATION -------- */
-  useEffect(() => {
-    const start = Date.now();
+/* -------- SESSION DURATION -------- */
+useEffect(() => {
+  const start = Date.now();
 
-    const sendDuration = () => {
-      const duration = Math.round((Date.now() - start) / 1000);
-      navigator.sendBeacon(
-        "/api/session",
-        JSON.stringify({ duration })
-      );
-    };
+  const sendDuration = () => {
+    const duration = Math.round((Date.now() - start) / 1000);
+    navigator.sendBeacon(
+      "/api/session",
+      JSON.stringify({ duration })
+    );
+  };
 
-    window.addEventListener("beforeunload", sendDuration);
-    return () => window.removeEventListener("beforeunload", sendDuration);
-  }, []);
+  window.addEventListener("beforeunload", sendDuration);
+  return () => window.removeEventListener("beforeunload", sendDuration);
+}, []);
+
 
   /* -------- IMAGE AUTO SLIDE -------- */
   useEffect(() => {
