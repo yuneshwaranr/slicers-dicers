@@ -64,22 +64,22 @@ function App() {
   const slides = activeReport.images;
 
   /* -------- IMAGE AUTO SLIDE -------- */
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setSlideIndex(prev => (prev + 1) % slides.length);
-    }, 7000);
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     setSlideIndex(prev => (prev + 1) % slides.length);
+  //   }, 7000);
 
-    return () => clearInterval(timer);
-  }, [slides]);
+  //   return () => clearInterval(timer);
+  // }, [slides]);
 
-  /* -------- REPORT AUTO SWITCH -------- */
-  useEffect(() => {
-    const reportTimer = setInterval(() => {
-      setActiveReportIndex(prev => (prev + 1) % reports.length);
-    }, 22000);
+  // /* -------- REPORT AUTO SWITCH -------- */
+  // useEffect(() => {
+  //   const reportTimer = setInterval(() => {
+  //     setActiveReportIndex(prev => (prev + 1) % reports.length);
+  //   }, 22000);
 
-    return () => clearInterval(reportTimer);
-  }, []);
+  //   return () => clearInterval(reportTimer);
+  // }, []);
 
   /* -------- RESET SLIDE -------- */
   useEffect(() => {
