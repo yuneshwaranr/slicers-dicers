@@ -7,7 +7,7 @@ const reports = [
     key: "sales",
     button: "SALES",
     title1: "Sales and Inventory",
-    title2: "Compliance Overview",
+    title2: "Evaluate stock levels, sales velocity, aging, and gross margins while comparing YOY trends in unit movement and revenue.",
     images: [
       "/assets/Sales-1.png",
       "/assets/Sales-2.png",
@@ -15,10 +15,20 @@ const reports = [
     ]
   },
   {
+    key: "dos",
+    button: "DOS",
+    title1: "Daily Order Status",
+    title2: "Real-time order tracking plus warehouse and logistics efficiency insights—all in one view.",
+    images: [
+      "/assets/DOS-1.png",
+      "/assets/DOS-2.png"
+    ]
+  },
+  {
     key: "event",
     button: "EVENT",
     title1: "Event Pre-Post Analysis",
-    title2: "Engagement & Performance",
+    title2: "Measure impact by comparing event performance before and after execution.",
     images: [
       "/assets/Event-1.png"
     ]
@@ -27,7 +37,7 @@ const reports = [
     key: "prod",
     button: "PRODUCT",
     title1: "Production Performance Dashboard",
-    title2: "Output & Efficiency",
+    title2: "Track product performance with sales, stock, and pricing insights by age group and line.",
     images: [
       "/assets/Product-1.png",
       "/assets/Product-2.png"
@@ -37,7 +47,7 @@ const reports = [
     key: "support",
     button: "SUPPORT",
     title1: "Customer Support and Satisfaction",
-    title2: "Tickets & Resolution",
+    title2: "Track SLAs and ticket trends to measure customer support performance and satisfaction",
     images: [
       "/assets/Support-1.png",
       "/assets/Support-2.png"
@@ -57,7 +67,7 @@ function App() {
   useEffect(() => {
     const timer = setInterval(() => {
       setSlideIndex(prev => (prev + 1) % slides.length);
-    }, 4000);
+    }, 7000);
 
     return () => clearInterval(timer);
   }, [slides]);
@@ -66,7 +76,7 @@ function App() {
   useEffect(() => {
     const reportTimer = setInterval(() => {
       setActiveReportIndex(prev => (prev + 1) % reports.length);
-    }, 5000);
+    }, 22000);
 
     return () => clearInterval(reportTimer);
   }, []);
