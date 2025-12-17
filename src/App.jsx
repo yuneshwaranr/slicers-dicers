@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
-import Analytics from "./Analytics";
 import "./App.css";
 
 const reports = [
@@ -55,28 +54,6 @@ function App() {
   const activeReport = reports[activeReportIndex];
   const slides = activeReport.images;
 
-  /* -------- PAGE VIEWS -------- */
-useEffect(() => {
-  fetch("/api/view", { method: "POST" }).catch(() => {});
-}, []);
-
-/* -------- SESSION DURATION -------- */
-useEffect(() => {
-  const start = Date.now();
-
-  const sendDuration = () => {
-    const duration = Math.round((Date.now() - start) / 1000);
-    navigator.sendBeacon(
-      "/api/session",
-      JSON.stringify({ duration })
-    );
-  };
-
-  window.addEventListener("beforeunload", sendDuration);
-  return () => window.removeEventListener("beforeunload", sendDuration);
-}, []);
-
-
   /* -------- IMAGE AUTO SLIDE -------- */
   useEffect(() => {
     const timer = setInterval(() => {
@@ -115,8 +92,7 @@ useEffect(() => {
           <div className="page">
             <div className="header">
               <div className="view-counter">
-                👁 {views ?? "—"} views ·{" "}
-                <Link to="/analytics">Analytics</Link>
+
               </div>
 
               <h1 className="title">{activeReport.title1}</h1>
@@ -150,7 +126,6 @@ useEffect(() => {
         }
       />
 
-      <Route path="/analytics" element={<Analytics />} />
     </Routes>
   );
 }
