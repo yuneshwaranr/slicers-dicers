@@ -20,8 +20,7 @@ const reports = [
     title1: "Event Pre-Post Analysis",
     title2: "Engagement & Performance",
     images: [
-      "/assets/Event-1.png",
-      "/assets/Event-2.png"
+      "/assets/Event-1.png"
     ]
   },
   {
