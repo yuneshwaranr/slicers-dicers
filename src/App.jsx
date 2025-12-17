@@ -63,35 +63,42 @@ function App() {
   const activeReport = reports[activeReportIndex];
   const slides = activeReport.images;
 
-  /* -------- IMAGE AUTO SLIDE -------- */
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     setSlideIndex(prev => (prev + 1) % slides.length);
-  //   }, 7000);
-
-  //   return () => clearInterval(timer);
-  // }, [slides]);
-
-  // /* -------- REPORT AUTO SWITCH -------- */
-  // useEffect(() => {
-  //   const reportTimer = setInterval(() => {
-  //     setActiveReportIndex(prev => (prev + 1) % reports.length);
-  //   }, 22000);
-
-  //   return () => clearInterval(reportTimer);
-  // }, []);
-
-  /* -------- RESET SLIDE -------- */
   useEffect(() => {
     setSlideIndex(0);
   }, [activeReportIndex]);
 
-  /* -------- NAV FUNCTIONS (FIXED) -------- */
-  const prevSlide = () =>
-    setSlideIndex(prev => (prev - 1 + slides.length) % slides.length);
+  // const prevSlide = () =>
+  //   setSlideIndex(prev => (prev - 1 + slides.length) % slides.length);
 
-  const nextSlide = () =>
-    setSlideIndex(prev => (prev + 1) % slides.length);
+  // const nextSlide = () =>
+  //   setSlideIndex(prev => (prev + 1) % slides.length);
+
+  const prevSlide = () => {
+  if (slideIndex === 0) {
+    // go to previous report
+    const prevReportIndex =
+      (activeReportIndex - 1 + reports.length) % reports.length;
+
+    setActiveReportIndex(prevReportIndex);
+    setSlideIndex(reports[prevReportIndex].images.length - 1);
+  } else {
+    setSlideIndex(prev => prev - 1);
+  }
+};
+
+const nextSlide = () => {
+  if (slideIndex === slides.length - 1) {
+    // go to next report
+    const nextReportIndex =
+      (activeReportIndex + 1) % reports.length;
+
+    setActiveReportIndex(nextReportIndex);
+    setSlideIndex(0);
+  } else {
+    setSlideIndex(prev => prev + 1);
+  }
+};
+
 
   return (
     <Routes>
