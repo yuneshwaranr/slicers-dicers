@@ -52,13 +52,24 @@ const reports = [
       "/assets/Support-1.png",
       "/assets/Support-2.png"
     ]
+  },
+   {
+    key: "subscription",
+    button: "SUBSCRIPTION",
+    title1: "Subscription Intelligence",
+    title2: "Track subscription trends, churn rates, and revenue growth over time.",
+    images: [
+      "/assets/Subscription-1.png",
+      "/assets/Subscription-2.png",
+      "/assets/Subscription-3.png"
+    ]
   }
 ];
 
 function App() {
   const [activeReportIndex, setActiveReportIndex] = useState(0);
   const [slideIndex, setSlideIndex] = useState(0);
-  const [views, setViews] = useState(null);
+  // const [views, setViews] = useState(null);
 
   const activeReport = reports[activeReportIndex];
   const slides = activeReport.images;
