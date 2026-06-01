@@ -2,66 +2,129 @@ import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
-const reports = [
+// const reports = [
 
-  {
-    key: "shipment",
-    button: "SHIPMENT",
-    title1: "Shipment Performance Report",
-    title2: "Track shipment performance with insights on total orders, delivery status, delays, regional distribution, and on-time delivery trends.",
-    images: ["/assets/Shipment_1.png"]
-  },
-  {
-    key: "po",
-    button: "PO",
-    title1: "Purchase Orders Report",
-    title2: "Analyze purchase order performance, vendor status, warehouse distribution, and spending trends across procurement operations.",
-    images: ["/assets/PO_1.png"]
-  },
-  {
-    key: "dos",
-    button: "DOS",  
-    title1: "Daily Order Status",
-    title2: "Real-time order tracking plus warehouse and logistics efficiency insights—all in one view.",
-    images: ["/assets/DOS-1.png"]
-  },  
-  {
-    key: "support",
-    button: "SUPPORT",
-    title1: "Customer Support and Satisfaction",
-    title2: "Track SLAs and ticket trends to measure customer support performance and satisfaction",
-    images: ["/assets/Support-1.png", "/assets/Support-2.png"]
-  }
-  // {
-  //   key: "sales",
-  //   button: "SALES",
-  //   title1: "Sales and Inventory",
-  //   title2: "Evaluate stock levels, sales velocity, aging, and gross margins while comparing YOY trends in unit movement and revenue.",
-  //   images: ["/assets/Sales-1.png", "/assets/Sales-2.png", "/assets/Sales-3.png"]
-  // }
-  // {
-  //   key: "subscription",
-  //   button: "SUBSCRIPTION",
-  //   title1: "Subscription Intelligence",
-  //   title2: "Track subscription trends, churn rates, and revenue growth over time.",
-  //   images: ["/assets/Subscription-1.png", "/assets/Subscription-2.png", "/assets/Subscription-3.png"]
-  // },
+//   {
+//     key: "shipment",
+//     button: "SHIPMENT",
+//     title1: "Shipment Performance Report",
+//     title2: "Track shipment performance with insights on total orders, delivery status, delays, regional distribution, and on-time delivery trends.",
+//     images: ["/assets/Shipment_1.png"]
+//   },
+//   {
+//     key: "po",
+//     button: "PO",
+//     title1: "Purchase Orders Report",
+//     title2: "Analyze purchase order performance, vendor status, warehouse distribution, and spending trends across procurement operations.",
+//     images: ["/assets/PO_1.png"]
+//   },
+//   {
+//     key: "dos",
+//     button: "DOS",  
+//     title1: "Daily Order Status",
+//     title2: "Real-time order tracking plus warehouse and logistics efficiency insights—all in one view.",
+//     images: ["/assets/DOS-1.png"]
+//   },  
+//   {
+//     key: "support",
+//     button: "SUPPORT",
+//     title1: "Customer Support and Satisfaction",
+//     title2: "Track SLAs and ticket trends to measure customer support performance and satisfaction",
+//     images: ["/assets/Support-1.png", "/assets/Support-2.png"]
+//   }
+//   // {
+//   //   key: "sales",
+//   //   button: "SALES",
+//   //   title1: "Sales and Inventory",
+//   //   title2: "Evaluate stock levels, sales velocity, aging, and gross margins while comparing YOY trends in unit movement and revenue.",
+//   //   images: ["/assets/Sales-1.png", "/assets/Sales-2.png", "/assets/Sales-3.png"]
+//   // }
+//   // {
+//   //   key: "subscription",
+//   //   button: "SUBSCRIPTION",
+//   //   title1: "Subscription Intelligence",
+//   //   title2: "Track subscription trends, churn rates, and revenue growth over time.",
+//   //   images: ["/assets/Subscription-1.png", "/assets/Subscription-2.png", "/assets/Subscription-3.png"]
+//   // },
   
+//   // {
+//   //   key: "event",
+//   //   button: "EVENT",
+//   //   title1: "Event Pre-Post Analysis",
+//   //   title2: "Measure impact by comparing event performance before and after execution.",
+//   //   images: ["/assets/Event-1.png"]
+//   // },
+
+//   // {
+//   //   key: "prod",
+//   //   button: "PRODUCT",
+//   //   title1: "Production Performance Dashboard",
+//   //   title2: "Track product performance with sales, stock, and pricing insights by age group and line.",
+//   //   images: ["/assets/Product-1.png"]
+//   // }
+// ];
+const reports = [
+  {
+    key: "sales",
+    button: "SALES",
+    title1: "Sales and Inventory",
+    title2: "Evaluate stock levels, sales velocity, aging, and gross margins while comparing YOY trends in unit movement and revenue.",
+    images: [
+      "/assets/Sales-1.png",
+      "/assets/Sales-2.png",
+      "/assets/Sales-3.png"
+    ]
+  },
+  {
+    key: "subscription",
+    button: "SUBSCRIPTION",
+    title1: "Subscription Intelligence",
+    title2: "Track subscription trends, churn rates, and revenue growth over time.",
+    images: [
+      "/assets/Subscription-1.png",
+      "/assets/Subscription-2.png",
+      "/assets/Subscription-3.png"
+    ]
+  },
   // {
-  //   key: "event",
-  //   button: "EVENT",
-  //   title1: "Event Pre-Post Analysis",
-  //   title2: "Measure impact by comparing event performance before and after execution.",
-  //   images: ["/assets/Event-1.png"]
+  //   key: "dos",
+  //   button: "DOS",
+  //   title1: "Daily Order Status",
+  //   title2: "Real-time order tracking plus warehouse and logistics efficiency insights—all in one view.",
+  //   images: [
+  //     "/assets/DOS-1.png"
+  //     // "/assets/DOS-2.png"
+  //   ]
   // },
+  {
+    key: "event",
+    button: "EVENT",
+    title1: "Event Pre-Post Analysis",
+    title2: "Measure impact by comparing event performance before and after execution.",
+    images: [
+      "/assets/Event-1.png"
+    ]
+  },
 
   // {
-  //   key: "prod",
-  //   button: "PRODUCT",
-  //   title1: "Production Performance Dashboard",
-  //   title2: "Track product performance with sales, stock, and pricing insights by age group and line.",
-  //   images: ["/assets/Product-1.png"]
-  // }
+  //   key: "support",
+  //   button: "SUPPORT",
+  //   title1: "Customer Support and Satisfaction",
+  //   title2: "Track SLAs and ticket trends to measure customer support performance and satisfaction",
+  //   images: [
+  //     "/assets/Support-1.png",
+  //     "/assets/Support-2.png"
+  //   ]
+  // },  
+  {
+    key: "prod",
+    button: "PRODUCT",
+    title1: "Production Performance Dashboard",
+    title2: "Track product performance with sales, stock, and pricing insights by age group and line.",
+    images: [
+      "/assets/Product-1.png"
+    ]
+  },
 ];
 
 function App() {
